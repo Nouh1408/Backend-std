@@ -26,7 +26,7 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
  */
 /* try{
     let oldData = fs.readFileSync("./data.json", {encoding:"utf-8"})
-    let newData = {name:"Ahmed", salary:30000}
+    let newData = {name:"NOUH", salary:30000}
     oldData = JSON.parse(oldData)
     oldData.push(newData)
     
@@ -34,7 +34,20 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
 } catch(err){
     console.error(err.message);
 } */
+
+
   //to delete data of data.txt
-  fs.writeFileSync("./data.txt", "Ahmed")  
+  //   fs.writeFileSync("./data.txt", "Ahmed")  
+
+/* 
+  try{
+    fs.writeFileSync("./data.json", JSON.stringify([]))
+  } catch(err){
+    console.log(err.message);
+    
+  } */
+//  fs.writeFileSync("./Hambozo.txt", "TESTin") //create the file if not exist
+fs.unlinkSync("Hambozo.txt") //removes the file permenantly throws error if file does not exist
+// fs.existsSync() //returns boolean checks if the file exist ir not
 
 
