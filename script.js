@@ -59,3 +59,48 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
     
 }
  */
+const {EventEmitter} = require("node:events")
+const readstream = fs.createReadStream("./test.txt",{
+    highWaterMark:64*1024,
+    encoding:'utf-8',
+    start:3,
+    end:1000
+    //there is a autoclause which i have must close it using readstream.close() in setTimeout
+    //emitClose by default is true if false it dosn't show in the Terminal that it is closed like text
+}) //set buffer to 64kb
+readstream.on("open",()=>{
+    console.log("file is opened");
+    
+})
+readstream.on("ready",()=>{
+    console.log("fiel is ready ");
+    
+})
+readstream.on("data", (chunk)=>{ //the eventstream every time it has ready data it sends it 
+ console.log('==================================');
+ console.log('==================================');
+ console.log(chunk);
+ readstream.pause()
+ setTimeout(() => {
+    readstream.resume()
+ }, 1000);
+ 
+ 
+})
+readstream.on('end',()=>{ //this is not the end u still need to close the file
+    console.log("ended");
+    
+})
+
+readstream.on("close", () =>{
+    console.log("file closed");
+    
+})
+readstream.on("pause", ()=>{
+    console.log("file is paused");
+    
+})
+readstream.on('resume', ()=>{
+    console.log("file is resumed");
+    
+})
