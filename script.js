@@ -24,7 +24,7 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
     
 })
  */
-try{
+/* try{
     let oldData = fs.readFileSync("./data.json", {encoding:"utf-8"})
     let newData = {name:"Ahmed", salary:30000}
     oldData = JSON.parse(oldData)
@@ -33,7 +33,8 @@ try{
     fs.writeFileSync("./data.json", JSON.stringify(oldData)) //{flag:"a"}not prefered as it brings the new data beside array in JSON file
 } catch(err){
     console.error(err.message);
-    
-}
+} */
+  //to delete data of data.txt
+  fs.writeFileSync("./data.txt", "Ahmed")  
 
 

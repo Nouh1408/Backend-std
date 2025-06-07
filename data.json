@@ -2,5 +2,6 @@
   { "name": "Ah,med", "salary": 50000 },
   { "name": "Ihab", "salary": 20000 },
   { "name": "Ahmed", "salary": 30000 },
-  { "name": "Ahmed", "salary": 30000 }
+  { "name": "Ahmed", "salary": 30000 },
+  { "name": "Nouh", "Salary": 600000 }
 ]
