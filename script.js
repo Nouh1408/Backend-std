@@ -47,7 +47,15 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
     
   } */
 //  fs.writeFileSync("./Hambozo.txt", "TESTin") //create the file if not exist
-fs.unlinkSync("Hambozo.txt") //removes the file permenantly throws error if file does not exist
+// fs.unlinkSync("Hambozo.txt") //removes the file permenantly throws error if file does not exist
 // fs.existsSync() //returns boolean checks if the file exist ir not
 
-
+//mkdirSync makes a directory in the system we use recursive true to idk while rmdirsync used to delet a folder with all subfolders if recursive true   
+/* try{
+    // fs.mkdirSync("./attachments/profile/text.text",{recursive:true})
+    fs.rmdirSync("./attachments", {recursive:true}) //use rmdir since rmdirsync will be depreecated
+} catch(error){
+    console.log(error.message);
+    
+}
+ */
