@@ -59,9 +59,9 @@ fs.writeFile("./data.txt", ` Hello i am ${Fname} ${Lname}`,{flag:"a"},(err)=>{  
     
 }
  */
-const {EventEmitter} = require("node:events")
+/* const {EventEmitter} = require("node:events")
 const readstream = fs.createReadStream("./test.txt",{
-    highWaterMark:64*1024,
+    highWaterMark:64*1024, //size of bytes that will be taken from stream
     encoding:'utf-8',
     start:3,
     end:1000
@@ -103,4 +103,14 @@ readstream.on("pause", ()=>{
 readstream.on('resume', ()=>{
     console.log("file is resumed");
 
-})
+}) */
+//////////////////////////////////////////////////////////////////
+// 1 kb = 1024 byte
+
+const writeStream = fs.createWriteStream("./data-copy.txt")
+writeStream.write("kdsnfodknf") // emits data
+writeStream.write("kdsnfodknf")
+writeStream.write("kdsnfodknf")
+writeStream.write("kdsnfodknf")
+writeStream.end() //emit end
+
