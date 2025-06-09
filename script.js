@@ -102,5 +102,5 @@ readstream.on("pause", ()=>{
 })
 readstream.on('resume', ()=>{
     console.log("file is resumed");
-    
+
 })
