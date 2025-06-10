@@ -107,10 +107,9 @@ readstream.on('resume', ()=>{
 //////////////////////////////////////////////////////////////////
 // 1 kb = 1024 byte
 
-const writeStream = fs.createWriteStream("./data-copy.txt")
-writeStream.write("kdsnfodknf") // emits data
-writeStream.write("kdsnfodknf")
-writeStream.write("kdsnfodknf")
-writeStream.write("kdsnfodknf")
-writeStream.end() //emit end
+const writeStream = fs.createWriteStream("./data.txt")
+const readStream = fs.createReadStream("./data.txt")
+readStream.on('data',(chunk)=>{
+    
+})
 

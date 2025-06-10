@@ -3,8 +3,12 @@ let freeMemory = os.freemem()/1024**3; // Get the amount of free system memory i
 console.log(freeMemory);
 let totalMemory = os.free
  */
-const http =require("node:http")
-const port =3000
-const server = http.createServer((req,res,next)=>{
-    
+const fs = require("node:fs")
+const writeStream = fs.createWriteStream("./data-copy.txt");
+const readStream = fs.createReadStream("./data.txt")
+readStream.on("data",(chunk)=>{
+    writeStream.write(chunk)
+})
+readStream.on('end',()=>{
+    writeStream.end()
 })
