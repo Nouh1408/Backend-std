@@ -1,4 +1,5 @@
 const fs = require("node:fs")
+const {pipeline, Transform} = require("node:stream")
 /**
  * read (readFileSync - readFile - read)
  * write
@@ -107,9 +108,39 @@ readstream.on('resume', ()=>{
 //////////////////////////////////////////////////////////////////
 // 1 kb = 1024 byte
 
-const writeStream = fs.createWriteStream("./data.txt")
-const readStream = fs.createReadStream("./data.txt")
-readStream.on('data',(chunk)=>{
-    
-})
 
+
+//copying data from a file to another 
+/* const fs = require("node:fs")
+const writeStream = fs.createWriteStream("./data-copy.txt");
+const readStream = fs.createReadStream("./data.txt")
+readStream.on("data",(chunk)=>{
+    writeStream.write(chunk)
+})
+readStream.on('end',()=>{
+    writeStream.end()
+})
+    //easier implementation
+    const readStream = fs.createReadStream("./data.txt")
+const writeStream = fs.createWriteStream("./data-copy.txt")
+readStream.pipe(writeStream)
+ */
+
+const readStream = fs.createReadStream("./data.txt")
+const writeStream = fs.createWriteStream("./data-copy.txt")
+
+const transform = new Transform({
+    transform: (chunk,encoding,cb)=>{
+        chunk = chunk.toString()
+        chunk = chunk.toUpperCase()
+        cb(null, chunk)
+    }
+
+})
+pipeline(readStream,transform, writeStream, (err)=>{
+    if(err){
+        console.log(err);
+    } else{
+
+    }
+})
