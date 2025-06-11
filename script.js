@@ -126,7 +126,7 @@ const writeStream = fs.createWriteStream("./data-copy.txt")
 readStream.pipe(writeStream)
  */
 
-const readStream = fs.createReadStream("./data.txt")
+/* const readStream = fs.createReadStream("./data.txt")
 const writeStream = fs.createWriteStream("./data-copy.txt")
 
 const transform = new Transform({
@@ -143,4 +143,36 @@ pipeline(readStream,transform, writeStream, (err)=>{
     } else{
 
     }
+}) */
+/*********************************http*********************************************/
+
+const http =require("node:http") //when deploy https //object from core module
+const server =http.createServer((req, res)=>{
+    // console.log(req);//object
+    const {url, method} = req
+    console.log({url,method});
+    if(url=="/product" && method=="GET"){
+        // console.log("Productsdfd");
+        res.write("produts")
+        res.end()
+        
+    } else if(url=="/product" && method=="POST"){
+        console.log("add Product");
+        
+    } 
+    else{
+        console.log("Invalid Routing");
+        
+    }
+    
+    
+})//returns a new instance server (object)
+server.listen(3000,()=>{
+    console.log("Server running on port ",3000); //GET by dEfault Front-end controls the form and chooses the method
+    
 })
+
+
+
+
+
