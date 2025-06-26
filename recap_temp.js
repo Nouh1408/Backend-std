@@ -18,15 +18,36 @@ for(const key in user){
 } */
 
 //for of with array
-const str = "basma";
+/* const str = "basma";
 for (const i of str) {
     console.log(i);
-}
+} */
+
+/* var mostWordsFound = function(sentences) {
+    let count =0
+    for(let i=0;i<sentences.length;i++){
+        if(sentences[i]===" " ||sentences[i]===`" "`){
+            count++
+        }
+        console.log(count);
+        
+    }
+};
+mostWordsFound(["alice and bob love leetcode", "i think so too", "this is great thanks very much"])
+ */
+var isPalindrome = function(x) {
+    
+    let digits = x.toString()
+    let reverse = digits.split('').reverse().join('')
+
+    
+
+  return digits ===reverse
+    
 
 
-
-
-
+};
+console.log(isPalindrome(121))
 
 
 
