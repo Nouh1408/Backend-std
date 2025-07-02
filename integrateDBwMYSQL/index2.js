@@ -94,7 +94,82 @@ app.post("/insertProducts", (req, res, next) => {
     }
   );
 });
+//sales idk
+app.post('/sale', (req, res) => {
+  const { ProductName, QuantitySold, SalesDate } = req.body;
 
+  if (!ProductName || !QuantitySold || !SalesDate) {
+    return res.status(400).send("Missing required fields.");
+  }
+
+  // Step 1: Get ProductID from ProductName
+  const getProductId = `SELECT ProductID FROM products WHERE ProductName = ?`;
+
+  dbConnection.execute(getProductId, [ProductName], (err, results) => {
+    if (err) {
+      console.error("Database error:", err.message);
+      return res.status(500).send("Internal server error.");
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send("Product not found.");
+    }
+
+    const ProductID = results[0].ProductID;
+
+    // Step 2: Insert into sales
+    const insertSale = `
+      INSERT INTO sales (ProductID, QuantitySold, SalesDate)
+      VALUES (?, ?, ?)
+    `;
+
+    dbConnection.execute(insertSale, [ProductID, QuantitySold, SalesDate], (err2) => {
+      if (err2) {
+        console.error("Failed to record sale:", err2.message);
+        return res.status(500).send("Failed to record sale.");
+      }
+
+      res.status(200).send("Sale recorded successfully.");
+    });
+  });
+});
+
+//update price
+app.put('/updatePrice', (req,res)=>{
+    const {ProductName, NewPrice} = req.body
+    // console.log({ProductName, NewPrice});
+    const updatePrice =   `UPDATE products SET Price = 25.00 WHERE ProductName = 'bread';`
+    dbConnection.execute(updatePrice,(err,result)=>{
+        if(err){
+            console.log("error in updating");
+            
+        }else{
+            console.log("Updated");
+            
+        }
+    })
+    
+})
+//delete eggs
+app.delete('/deleteProduct', (req,res)=>{
+    const {ProductName} = req.body
+
+    if (!ProductName) {
+    return res.status(400).send("Missing ProductName.");
+  }
+   const deleteQuery = `DELETE FROM products WHERE ProductName = ?`;
+   dbConnection.execute(deleteQuery, [ProductName], (err, result) => {
+    if (err) {
+      console.error("Failed to delete product:", err.message);
+      return res.status(500).send("Failed to delete product.");
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Product not found.");
+    }
+    res.status(200).send(`Product '${ProductName}' deleted successfully.`);
+})
+})
 
 app.listen(port, () => {
   console.log("app is running on port", port);
