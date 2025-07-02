@@ -26,8 +26,9 @@ app.post("/user", (req, res, next) => {
   const { name, email, password } = req.body;
   // console.log({name, email,password });
   //prepare query to execute in db
-  let query = `INSERT INTO drivers (name,email,password) VALUES("${name}","${email}","${password}")`;
-  dbConnection.execute(query, (error, result) => {
+  let query = `INSERT INTO drivers (name,email,password) VALUES(?,?,?)`;
+  //execute() executes in two steps first from INSERT --- VALUES()
+  dbConnection.execute(query,[name,email,password], (error, result) => {
     if (error) {
         if(error.errno ===1062){
             return res.status(409).json({message:"User Already Exist", success:false})
